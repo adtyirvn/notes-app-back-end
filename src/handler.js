@@ -101,7 +101,7 @@ const editNoteByIdHandler = (request, h) => {
   return response;
 };
 
-const deleteNoteByHandler = (request, h) => {
+const deleteNoteByIdHandler = (request, h) => {
   const { id } = request.params;
 
   const index = notes.findIndex((note) => note.id === id);
@@ -129,5 +129,5 @@ module.exports = {
   getAllNoteHandler,
   getNoteByIdHandler,
   editNoteByIdHandler,
-  deleteNoteByHandler,
+  deleteNoteByIdHandler,
 };
