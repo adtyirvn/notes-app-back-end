@@ -40,7 +40,7 @@ const addNoteHandler = (request, h) => {
   return response;
 };
 
-const getAllNoteHandler = () => ({
+const getAllNotesHandler = () => ({
   status: 'success',
   data: {
     notes,
@@ -126,7 +126,7 @@ const deleteNoteByIdHandler = (request, h) => {
 
 module.exports = {
   addNoteHandler,
-  getAllNoteHandler,
+  getAllNotesHandler,
   getNoteByIdHandler,
   editNoteByIdHandler,
   deleteNoteByIdHandler,
