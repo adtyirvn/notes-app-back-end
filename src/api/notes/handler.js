@@ -1,8 +1,9 @@
 /* eslint-disable no-underscore-dangle */
 class NotesHandler {
   // parameter class using service in folder service ex: NotesServices.js
-  constructor(service) {
+  constructor(service, validator) {
     this._service = service;
+    this._validator = validator;
     // using bind for this in each handler to glue this in initiate object from this class
     this.postNoteHandler = this.postNoteHandler.bind(this);
     this.getNotesHandler = this.getNotesHandler.bind(this);
@@ -14,7 +15,9 @@ class NotesHandler {
   // make handler for each route for request and response
   postNoteHandler(request, h) {
     try {
+      this._validator.validateNotePayload(request.payload);
       const { title = 'untitled', body, tags } = request.payload;
+
       // using logic from service
       const noteId = this._service.addNote({ title, body, tags });
 
@@ -66,6 +69,7 @@ class NotesHandler {
 
   putNoteByIdHandler(request, h) {
     try {
+      this._validator.validateNotePayload(request.payload);
       const { id } = request.params;
 
       this._service.editNoteById(id, request.payload);
