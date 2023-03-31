@@ -1,5 +1,6 @@
 // function using paramater as object from class handler
 // class handler for this specific plugin ex: notes found in path ./api/notes/handler.js
+// remember to use this bind to each specific handler in handler.js
 const routes = (handler) => [
   {
     method: 'POST',

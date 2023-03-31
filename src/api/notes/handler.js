@@ -3,7 +3,7 @@ class NotesHandler {
   // parameter class using service in folder service ex: NotesServices.js
   constructor(service) {
     this._service = service;
-    // using bind fo this in each handler to glue this in initiate object from this class
+    // using bind for this in each handler to glue this in initiate object from this class
     this.postNoteHandler = this.postNoteHandler.bind(this);
     this.getNotesHandler = this.getNotesHandler.bind(this);
     this.getNoteByIdHandler = this.getNoteByIdHandler.bind(this);
