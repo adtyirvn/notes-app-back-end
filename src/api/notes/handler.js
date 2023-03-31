@@ -2,27 +2,33 @@
 class NotesHandler {
   constructor(service) {
     this._service = service;
+
+    this.postNoteHandler = this.postNoteHandler.bind(this);
+    this.getNotesHandler = this.getNotesHandler.bind(this);
+    this.getNoteByIdHandler = this.getNoteByIdHandler.bind(this);
+    this.putNoteByIdHandler = this.putNoteByIdHandler.bind(this);
+    this.deleteNoteByIdHandler = this.deleteNoteByIdHandler.bind(this);
   }
 
   postNoteHandler(request, h) {
     try {
-      const { title = 'untitled', body, tags } = request.payoad;
+      const { title = 'untitled', body, tags } = request.payload;
 
       const noteId = this._service.addNote({ title, body, tags });
 
       const response = h.response({
         status: 'success',
-        messsage: 'Catatan berhasil ditambahkan',
+        message: 'Catatan berhasil ditambahkan',
         data: {
           noteId,
         },
       });
       response.code(201);
       return response;
-    } catch (err) {
+    } catch (error) {
       const response = h.response({
         status: 'fail',
-        messsage: err.message,
+        message: error.message,
       });
       response.code(400);
       return response;
@@ -39,7 +45,7 @@ class NotesHandler {
     };
   }
 
-  getNoteByIdHanlder(request, h) {
+  getNoteByIdHandler(request, h) {
     try {
       const { id } = request.params;
       const note = this._service.getNoteById(id);
@@ -49,8 +55,8 @@ class NotesHandler {
           note,
         },
       };
-    } catch (err) {
-      const response = h.response({ status: 'fail', message: 'err.message' });
+    } catch (error) {
+      const response = h.response({ status: 'fail', message: error.message });
       response.code(404);
       return response;
     }
@@ -64,10 +70,10 @@ class NotesHandler {
         status: 'success',
         message: 'Catatan berhasil diperbarui',
       };
-    } catch (err) {
+    } catch (error) {
       const response = h.response({
         status: 'fail',
-        message: err.message,
+        message: error.message,
       });
       response.code(404);
       return response;
@@ -82,10 +88,10 @@ class NotesHandler {
         status: 'success',
         message: 'Catatan berhasil dihapus',
       };
-    } catch (err) {
+    } catch (error) {
       const response = h.response({
         status: 'fail',
-        message: err.message,
+        message: error.message,
       });
       response.code(404);
       return response;
