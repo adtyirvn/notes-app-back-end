@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 const { nanoid } = require('nanoid');
-
+// this is service class for logic only
 class NotesService {
   constructor() {
     this._notes = [];

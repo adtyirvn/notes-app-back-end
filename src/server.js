@@ -4,6 +4,7 @@ const notes = require('./api/notes');
 const NotesService = require('./services/inMemory/NotesService');
 
 const init = async () => {
+  // initiate NotesService for logic to use in plugin
   const notesService = new NotesService();
 
   const server = Hapi.server({
@@ -11,6 +12,7 @@ const init = async () => {
     host: process.env.NODE_ENV !== 'production' ? 'localhost' : '0.0.0.0',
     routes: {
       cors: {
+        // cors
         origin: ['*'],
       },
     },
@@ -19,6 +21,7 @@ const init = async () => {
   // server.route(routes);
   await server.register({
     plugin: notes,
+    // options for passing data ex: object initiate from NotesService.js
     options: {
       service: notesService,
     },
