@@ -47,7 +47,7 @@ class NotesService {
   async editNoteById(id, { title, body, tags }) {
     const updatedAt = new Date().toISOString();
     const query = {
-      text: 'UPDATE notes SET title=$1, body=$2, tags=$3, update_at=updatedAt WHERE id = $4',
+      text: 'UPDATE notes SET title=$1, body=$2, tags=$3, update_at=updatedAt WHERE id = $4 RETURNING id',
       values: [title, body, tags, updatedAt, id],
     };
     const result = await this._pool.query(query);
