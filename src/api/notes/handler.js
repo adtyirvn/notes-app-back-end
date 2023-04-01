@@ -17,6 +17,7 @@ class NotesHandler {
   // make handler for each route for request and response
   postNoteHandler(request, h) {
     try {
+      // validate request payload
       this._validator.validateNotePayload(request.payload);
       const { title = 'untitled', body, tags } = request.payload;
 

@@ -1,3 +1,4 @@
+// custom error for better validation error result
 class ClientError extends Error {
   constructor(message, statusCode = 400) {
     super(message);
