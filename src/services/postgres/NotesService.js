@@ -38,7 +38,7 @@ class NotesService {
     };
     const result = await this._pool.query(query);
 
-    if (!result.rowCount.length) {
+    if (!result.rows.length) {
       throw new NotFoundError('Catataan tidak ditemukan');
     }
     return result.rows.map(mapDBToModel)[0];
@@ -47,12 +47,12 @@ class NotesService {
   async editNoteById(id, { title, body, tags }) {
     const updatedAt = new Date().toISOString();
     const query = {
-      text: 'UPDATE notes SET title=$1, body=$2, tags=$3, update_at=updatedAt WHERE id = $4 RETURNING id',
+      text: 'UPDATE notes SET title=$1, body=$2, tags=$3, updated_at=$4 WHERE id = $5 RETURNING id',
       values: [title, body, tags, updatedAt, id],
     };
     const result = await this._pool.query(query);
 
-    if (!result.rowCount.length) {
+    if (!result.rows.length) {
       throw new NotFoundError('Gagal memperbarui catatan, Id tidak ditemukan');
     }
   }
