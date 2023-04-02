@@ -1,4 +1,5 @@
 /* eslint-disable no-underscore-dangle */
+const autoBind = require('auto-bind');
 
 class NotesHandler {
   // parameter class using service in folder service ex: NotesServices.js
@@ -6,11 +7,12 @@ class NotesHandler {
     this._service = service;
     this._validator = validator;
     // using bind for this in each handler to glue this in initiate object from this class
-    this.postNoteHandler = this.postNoteHandler.bind(this);
-    this.getNotesHandler = this.getNotesHandler.bind(this);
-    this.getNoteByIdHandler = this.getNoteByIdHandler.bind(this);
-    this.putNoteByIdHandler = this.putNoteByIdHandler.bind(this);
-    this.deleteNoteByIdHandler = this.deleteNoteByIdHandler.bind(this);
+    // this.postNoteHandler = this.postNoteHandler.bind(this);
+    // this.getNotesHandler = this.getNotesHandler.bind(this);
+    // this.getNoteByIdHandler = this.getNoteByIdHandler.bind(this);
+    // this.putNoteByIdHandler = this.putNoteByIdHandler.bind(this);
+    // this.deleteNoteByIdHandler = this.deleteNoteByIdHandler.bind(this);
+    autoBind(this);
   }
 
   // make handler for each route for request and response
