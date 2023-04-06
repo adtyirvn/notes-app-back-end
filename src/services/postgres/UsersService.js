@@ -4,15 +4,13 @@ const { nanoid } = require('nanoid');
 const InvariantError = require('../../exceptions/InvariantError');
 const NotFoundError = require('../../exceptions/NotFoundError');
 
-class UserService {
+class UsersService {
   constructor() {
     this._pool = new Pool();
   }
 
   async addUser({ username, password, fullname }) {
-    // TODO: Verifikasi username, pastikan belum terdaftar.
     await this.verifyNewUsername(username);
-    // TODO: Bila verifikasi lolos, maka masukkan user baru ke database.
     const id = `user-${nanoid(16)}`;
     const hashedPassword = await bcrypt.hash(password, 10);
     const query = {
@@ -26,7 +24,7 @@ class UserService {
     return result.rows[0].id;
   }
 
-  async verifyNewUsername({ username }) {
+  async verifyNewUsername(username) {
     const query = {
       text: 'SELECT username FROM users WHERE username = $1',
       values: [username],
@@ -51,4 +49,4 @@ class UserService {
     return result.rows[0];
   }
 }
-module.exports = UserService;
+module.exports = UsersService;
