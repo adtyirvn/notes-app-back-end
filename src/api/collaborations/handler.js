@@ -1,6 +1,6 @@
 const autoBind = require('auto-bind');
 
-class collaborationsHandler {
+class CollaborationsHandler {
   constructor(collaborationsService, notesService, validator) {
     this._collaborationsService = collaborationsService;
     this._notesService = notesService;
@@ -43,4 +43,4 @@ class collaborationsHandler {
     };
   }
 }
-module.exports = collaborationsHandler;
+module.exports = CollaborationsHandler;
