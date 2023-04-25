@@ -11,7 +11,6 @@ const routes = (handler) => [
         multipart: true,
         output: 'stream',
       },
-      auth: 'notesapp_jwt',
     },
   },
   {
